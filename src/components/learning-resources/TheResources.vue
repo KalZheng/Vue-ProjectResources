@@ -57,6 +57,7 @@ export default {
     return {
       resources: this.storedResources,
       addResource: this.addResource,
+      deleteResource: this.removeResource, 
     };
   },
   methods: {
@@ -72,6 +73,18 @@ export default {
       };
       this.storedResources.unshift(newResource);
       this.selectedTab = 'store-resources';
+    },
+    removeResource(resId) {
+      // this will not work beacuse the override 
+      // of the array via provide and inject 
+      // does not update to the rest of the places
+
+      // this.storedResources = this.storedResources.filter(
+      //   (res) => res.id !== resId
+      // );
+
+      const resIndex = this.storedResources.findIndex(res => res.id === resId);
+      this.storedResources.splice(resIndex, 1);
     },
   },
 };
